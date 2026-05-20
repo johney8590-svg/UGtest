@@ -60,7 +60,7 @@ y_fixed = np.full_like(x_rev, fixed_cost)
 y_total_cost = fixed_cost + x_rev * cost_rate
 
 # 開始畫圖 (支援中文設定)
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei', 'Arial'] # 針對 Windows 微軟正黑體
+plt.rcParams['font.sans-serif'] = ['Noto Sans TC', 'Arial Unicode MS', 'Arial'] # 針對 Windows 微軟正黑體
 plt.rcParams['axes.unicode_minus'] = False
 
 fig, ax = plt.subplots(figsize=(10, 6))
