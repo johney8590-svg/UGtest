@@ -18,14 +18,14 @@ plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC', 'Arial']
 plt.rcParams['axes.unicode_minus'] = False
 
 # 設定網頁標題與寬度
-st.set_page_config(page_title="便當店損益平衡分析系統", layout="wide")
+st.set_page_config(page_title="飲料店損益平衡分析系統", layout="wide")
 st.title("📊 餐飲門店損益平衡分析工具")
 st.write("請在左側輸入營運數據，系統將自動即時計算並導出分析圖表。")
 
 # --- 側邊欄 ---
 st.sidebar.header("🛠️ 營運數據輸入")
 
-price = st.sidebar.number_input("便當零售價 (元)", min_value=1, value=169)
+price = st.sidebar.number_input("飲料零售價 (元)", min_value=1, value=169)
 cost_rate = st.sidebar.slider("食材成本率 (%)", min_value=10, max_value=90, value=45) / 100
 hq_fee_rate = st.sidebar.slider("總部費用率 (%)", min_value=0.0, max_value=10.0, value=0.0, step=0.5) / 100
 delivery_fee_rate = st.sidebar.slider("外送費用率 (%)", min_value=0, max_value=20, value=0, step=1) / 100
@@ -56,11 +56,9 @@ st.sidebar.markdown("---")
 target_profit_rate = st.sidebar.slider("目標淨利率 (%)", min_value=0, max_value=50, value=10) / 100
 
 # --- 核心計算 ---
-# 變動成本率 = 食材 + 總部費用 + 外送費用
 variable_cost_rate = cost_rate + hq_fee_rate + delivery_fee_rate
 contribution_margin_rate = 1 - variable_cost_rate
 
-# 固定成本
 other_fixed_total = sum(v for _, v in other_items)
 fixed_cost = rent + labor + utility + other_fixed_total
 
@@ -87,10 +85,10 @@ else:
 col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("損益平衡營業額", f"${be_revenue:,.0f} 元")
-    st.caption(f"每月需賣出 {be_volume:,.0f} 個便當（日均 {be_volume/26:.0f} 個，以26天計）")
+    st.caption(f"每月需賣出 {be_volume:,.0f} 杯飲料（日均 {be_volume/30:.0f} 杯，以30天計）")
 with col2:
     st.metric(f"淨利 {target_profit_rate*100:.0f}% 所需營業額", f"${target_revenue:,.0f} 元")
-    st.caption(f"每月需賣出 {target_volume:,.0f} 個便當（日均 {target_volume/26:.0f} 個）")
+    st.caption(f"每月需賣出 {target_volume:,.0f} 杯飲料（日均 {target_volume/30:.0f} 杯，以30天計）")
 with col3:
     st.metric("目標淨利金額", f"${target_profit:,.0f} 元")
 
